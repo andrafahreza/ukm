@@ -60,7 +60,11 @@
                     <ul class="navbar-nav">
                         <li><a class="nav-link active" href="{{ route('index') }}">Home</a></li>
                         <li><a class="nav-link" href="{{ route('ukm') }}">Ukm</a></li>
-                        <li><a class="nav-link" href="courses.html">Pendaftaran</a></li>
+                        @if (Auth::check())
+                            @if (Auth::user()->role == "mahasiswa")
+                                <li><a class="nav-link" href="courses.html">Pendaftaran</a></li>
+                            @endif
+                        @endif
                         <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                     </ul>
                 </div>

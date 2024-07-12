@@ -19,21 +19,29 @@
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                            <center>
-                                <div class="brand-logo">
-                                    <img src="/front/unika.png" alt="logo" style="width: 100px;">
+                            @if ($errors->any())
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Error!</strong>  {{ $errors->first() }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
+                            @endif
+
+                            <center>
+                                <a href="{{ route('index') }}">
+                                    <div class="brand-logo">
+                                        <img src="/front/unika.png" alt="logo" style="width: 100px;">
+                                    </div>
+                                </a>
                                 <h4>UNIKA</h4>
                                 <h6 class="font-weight-light">Santo Thomas</h6>
                             </center>
-                            <form class="pt-3">
+                            <form class="pt-3" method="POST" action="{{ route('authentication') }}">
+                                @csrf
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
-                                        placeholder="Email">
+                                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" name="email" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control form-control-lg"
-                                        id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" name="password" required>
                                 </div>
                                 <div class="mt-3">
                                     <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" style="width: 100%">Sign In</button>

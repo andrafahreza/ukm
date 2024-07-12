@@ -62,7 +62,7 @@
                                     <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" style="width: 100%">Register</button>
                                 </div>
                                 <div class="text-center mt-4 font-weight-light">
-                                    Sudah memiliki akun? <a href="register.html" class="text-primary">Login Disini</a>
+                                    Sudah memiliki akun? <a href="{{ route('login') }}" class="text-primary">Login Disini</a>
                                 </div>
                             </form>
                         </div>
