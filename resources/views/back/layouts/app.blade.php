@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/back/css/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="/back/images/favicon.png" />
+    @stack('styles')
 </head>
 
 <body>
@@ -43,7 +44,7 @@
     <!-- inject:js -->
     <script src="/back/js/off-canvas.js"></script>
     <script src="/back/js/hoverable-collapse.js"></script>
-    <script src="/back/js/template.js"></script>
+    {{-- <script src="/back/js/template.js"></script> --}}
     <!-- endinject -->
     <!-- plugin js for this page -->
     <script src="/back/js/jquery.cookie.js" type="text/javascript"></script>
@@ -51,6 +52,8 @@
     <!-- Custom js for this page-->
     <script src="/back/js/dashboard.js"></script>
     <!-- End custom js for this page-->
+
+    @stack('scripts')
 </body>
 
 </html>

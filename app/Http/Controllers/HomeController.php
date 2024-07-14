@@ -8,6 +8,8 @@ class HomeController extends Controller
 {
     public function home()
     {
-        return view('back.index');
+        $title = 'dashboard';
+
+        return view('back.index', compact('title'));
     }
 }
