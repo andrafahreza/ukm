@@ -26,11 +26,11 @@ Route::middleware('auth')->group(function() {
         Route::post('simpan/{id?}', [UkmController::class, 'simpan'])->name("ukm-simpan");
         Route::post('hapus/{id?}', [UkmController::class, 'hapus'])->name("ukm-hapus");
 
-        Route::prefix("pengurus")->group(function() {
-            Route::get('/list/{id?}', [UkmController::class, 'pengurus'])->name("pengurus");
-            Route::get('show/{id?}', [UkmController::class, 'pengurus_show'])->name("pengurus-show");
-            Route::post('simpan/{id?}', [UkmController::class, 'pengurus_simpan'])->name("pengurus-simpan");
-            Route::post('hapus/{id?}', [UkmController::class, 'pengurus_hapus'])->name("pengurus-hapus");
+        Route::prefix("admin")->group(function() {
+            Route::get('/list/{id?}', [UkmController::class, 'admin'])->name("admin");
+            Route::get('show/{id?}', [UkmController::class, 'admin_show'])->name("admin-show");
+            Route::post('simpan/{id?}', [UkmController::class, 'admin_simpan'])->name("admin-simpan");
+            Route::post('hapus/{id?}', [UkmController::class, 'admin_hapus'])->name("admin-hapus");
         });
     });
 
@@ -47,5 +47,11 @@ Route::middleware('auth')->group(function() {
             Route::post('hapus/{id?}', [JurusanController::class, 'hapus'])->name("jurusan-hapus");
             Route::get('get/{id?}', [JurusanController::class, 'get'])->name("jurusan-get");
         });
+    });
+
+    // UKM
+    Route::prefix("profil-ukm")->group(function() {
+        Route::get('/', [UkmController::class, 'profil_ukm'])->name("profil-ukm");
+        Route::post('pengurus-simpan', [UkmController::class, 'pengurus_simpan'])->name("pengurus-simpan");
     });
 });

@@ -44,7 +44,7 @@
                                         <td>{!! $item->ukmDeskripsi !!}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary" onclick="detail({{ $item->id }})" id="btnDetail">Detail</button>
-                                            <a href="{{ route('pengurus', [$item->id]) }}" class="btn btn-sm btn-warning">Pengurus</a>
+                                            <a href="{{ route('admin', [$item->id]) }}" class="btn btn-sm btn-warning">Admin</a>
                                             <button type="button" class="btn btn-sm btn-danger" onclick="hapus({{ $item->id }})" id="btnHapus">Hapus</button>
                                         </td>
                                     </tr>

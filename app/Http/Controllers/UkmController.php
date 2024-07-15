@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PengurusUkm;
 use App\Models\Prodi;
 use App\Models\Ukm;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -129,18 +131,18 @@ class UkmController extends Controller
         }
     }
 
-    // Pengurus
-    public function pengurus($id = null)
+    // Admin
+    public function admin($id = null)
     {
         $title = "ukm";
         $ukm = Ukm::findOrFail($id);
         $user = User::where('ukm_id', $id)->latest()->get();
         $prodi = Prodi::get();
 
-        return view('back.pages.pengurus-ukm', compact('ukm', 'user', 'title', 'prodi'));
+        return view('back.pages.admin-ukm', compact('ukm', 'user', 'title', 'prodi'));
     }
 
-    public function pengurus_simpan(Request $request, $id = null)
+    public function admin_simpan(Request $request, $id = null)
     {
         DB::beginTransaction();
 
@@ -187,7 +189,7 @@ class UkmController extends Controller
         }
     }
 
-    public function pengurus_show($id = null)
+    public function admin_show($id = null)
     {
         $data = User::findOrFail($id);
 
@@ -205,7 +207,7 @@ class UkmController extends Controller
         }
     }
 
-    public function pengurus_hapus(Request $request)
+    public function admin_hapus(Request $request)
     {
         DB::beginTransaction();
 
@@ -222,6 +224,54 @@ class UkmController extends Controller
             DB::commit();
 
             return redirect()->back()->with("success", "Berhasil menghapus data");
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->withErrors($th->getMessage());
+        }
+    }
+
+    // profil UKM
+    public function profil_ukm()
+    {
+        $title = "profil_ukm";
+        $user = Auth::user();
+        $ukm = Ukm::findOrFail($user->ukm_id);
+        $pengurus = PengurusUkm::where('ukm_id', $user->ukm_id)->first();
+
+        return view('back.pages.profil-ukm', compact('title', "ukm", "pengurus"));
+    }
+
+    public function pengurus_simpan(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $data = [
+                "ukm_id" => Auth::user()->ukm_id,
+                "ketua_umum" => $request->ketua_umum,
+                "wakil_ketua_umum" => $request->wakil_ketua_umum,
+                "sekretaris" => $request->sekretaris,
+                "wakil_sekretaris" => $request->wakil_sekretaris,
+                "bendahara" => $request->bendahara,
+                "wakil_bendahara" => $request->wakil_bendahara,
+            ];
+
+            $pengurus = PengurusUkm::where('ukm_id', Auth::user()->ukm_id)->first();
+            if (empty($pengurus)) {
+                $pengurus = PengurusUkm::create($data);
+                if (!$pengurus->save()) {
+                    throw new \Exception("Terjadi kesalahan dalam menyimpan data");
+                }
+            } else {
+                if (!$pengurus->update($data)) {
+                    throw new \Exception("Terjadi kesalahan saat memperbarui data");
+                }
+            }
+
+            DB::commit();
+
+            return redirect()->back()->with("success", "Berhasil menyimpan data");
 
         } catch (\Throwable $th) {
             DB::rollBack();

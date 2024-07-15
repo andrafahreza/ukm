@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12">
             <a href="{{ route('ukm') }}" class="btn btn-secondary">< Kembali</a>
-            <button class="btn btn-primary" id="btnTambah">+ Tambah Pengurus UKM </button>
+            <button class="btn btn-primary" id="btnTambah">+ Tambah admin UKM </button>
             <div class="card mt-4">
                 <div class="card-header">
                     <h5>Data Akun UKM {{ $ukm->ukmNama }}</h5>
@@ -61,7 +61,7 @@
     <div class="modal fade modalForm" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
-                <form action="{{ route('pengurus-simpan') }}" method="POST" id="formData" enctype="multipart/form-data">
+                <form action="{{ route('admin-simpan') }}" method="POST" id="formData" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="ukm_id" value="{{ $ukm->id }}">
                     <div class="modal-header">
@@ -142,7 +142,7 @@
                         <h4 class="mb-3">Hapus Data!</h4>
                         <p class="text-muted mb-4"> Yakin ingin menghapus ini? </p>
                         <div class="hstack gap-2 justify-content-center">
-                            <form action="{{ route('pengurus-hapus') }}" method="POST">
+                            <form action="{{ route('admin-hapus') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" id="hapus_id">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
@@ -177,7 +177,7 @@
 
         function detail(id) {
             $('#formData')[0].reset();
-            var url = "{{ route('pengurus-show') }}" + "/" + id;
+            var url = "{{ route('admin-show') }}" + "/" + id;
 
             $.ajax({
                 type: "get",
@@ -191,11 +191,12 @@
 
                         const data = response.data;
                         $('#formData')[0].reset();
-                        $('#formData').attr("action", "{{ route('pengurus-simpan') }}" + "/" + data.id);
+                        $('#formData').attr("action", "{{ route('admin-simpan') }}" + "/" + data.id);
                         $('#email').val(data.email);
                         $('#nama_lengkap').val(data.nama_lengkap);
                         $('#npm').val(data.npm);
                         $('#jenis_kelamin').val(data.jenis_kelamin);
+                        $('#whatsapp').val(data.whatsapp);
                         $('#angkatan').val(data.angkatan);
                         $('#alamat').val(data.alamat);
                         $('#prodi_id').val(data.prodi_id);
