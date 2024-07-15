@@ -3,10 +3,11 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <button class="btn btn-primary" id="btnTambah">+ Tambah Data UKM </button>
+            <a href="{{ route('prodi') }}" class="btn btn-secondary">< Kembali</a>
+            <button class="btn btn-primary" id="btnTambah">+ Tambah Data Jurusan </button>
             <div class="card mt-4">
                 <div class="card-header">
-                    <h5>Data UKM</h5>
+                    <h5>Data Jurusan di Prodi {{ $prodi->nama_prodi }}</h5>
                 </div>
                 <div class="card-body">
                     @if ($errors->any())
@@ -28,8 +29,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama UKM</th>
-                                    <th>Deskripsi UKM</th>
+                                    <th>Nama Jurusan</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
@@ -37,14 +37,9 @@
                                 @foreach ($data as $key => $item)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>
-                                            {{ $item->ukmNama }} <br>
-                                            <img src="{{ $item->logo }}" width="200">
-                                        </td>
-                                        <td>{!! $item->ukmDeskripsi !!}</td>
+                                        <td>{{ $item->nama_jurusan }}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary" onclick="detail({{ $item->id }})" id="btnDetail">Detail</button>
-                                            <a href="{{ route('pengurus', [$item->id]) }}" class="btn btn-sm btn-warning">Pengurus</a>
                                             <button type="button" class="btn btn-sm btn-danger" onclick="hapus({{ $item->id }})" id="btnHapus">Hapus</button>
                                         </td>
                                     </tr>
@@ -60,8 +55,9 @@
     <div class="modal fade modalForm" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
-                <form action="{{ route('ukm-simpan') }}" method="POST" id="formData" enctype="multipart/form-data">
+                <form action="{{ route('jurusan-simpan') }}" method="POST" id="formData" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="prodi_id" value="{{ $prodi->id }}">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalFullscreenLabel">Simpan Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -74,20 +70,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <label>Nama UKM <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="ukmNama" id="ukmNama" placeholder="Masukkan Nama UKM" required>
-                            </div>
-                            <div class="col-md-12 mt-4">
-                                <label>Kontak <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="contact" id="contact" placeholder="Masukkan Nomor Kontak" required>
-                            </div>
-                            <div class="col-md-12 mt-4">
-                                <label>Logo <span class="text-danger logoStar">*</span></label>
-                                <input type="file" class="form-control" name="logo" id="logo" required>
-                            </div>
-                            <div class="col-md-12 mt-4">
-                                <label>Deskripsi <span class="text-danger">*</span></label>
-                                <textarea class="form-control" name="ukmDeskripsi" id="ukmDeskripsi" placeholder="Masukkan Deskripsi UKM" required></textarea>
+                                <label>Nama Jurusan <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nama_jurusan" id="nama_jurusan" placeholder="Masukkan Nama Jurusan" required>
                             </div>
                         </div>
                     </div>
@@ -109,7 +93,7 @@
                         <h4 class="mb-3">Hapus Data!</h4>
                         <p class="text-muted mb-4"> Yakin ingin menghapus ini? </p>
                         <div class="hstack gap-2 justify-content-center">
-                            <form action="{{ route('ukm-hapus') }}" method="POST">
+                            <form action="{{ route('jurusan-hapus') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" id="hapus_id">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
@@ -138,15 +122,13 @@
                 $('#formData')[0].reset();
                 $('#errorMessage').addClass('d-none');
                 $("#formData :input").prop("disabled", false);
-                $("#logo").prop('required', true);
-                $(".logoStar").removeClass('d-none');
                 $('.modalForm').modal('toggle');
             })
         });
 
         function detail(id) {
             $('#formData')[0].reset();
-            var url = "{{ route('ukm-show') }}" + "/" + id;
+            var url = "{{ route('jurusan-show') }}" + "/" + id;
 
             $.ajax({
                 type: "get",
@@ -157,15 +139,11 @@
                         $('.modalForm').modal('toggle');
                         $('#errorMessage').addClass('d-none');
                         $("#formData :input").prop("disabled", false);
-                        $("#logo").prop('required', false);
-                        $(".logoStar").addClass('d-none');
 
                         const data = response.data;
                         $('#formData')[0].reset();
-                        $('#formData').attr("action", "{{ route('ukm-simpan') }}" + "/" + data.id);
-                        $('#ukmNama').val(data.ukmNama);
-                        $('#ukmDeskripsi').val(data.ukmDeskripsi);
-                        $('#contact').val(data.contact);
+                        $('#formData').attr("action", "{{ route('jurusan-simpan') }}" + "/" + data.id);
+                        $('#nama_jurusan').val(data.nama_jurusan);
                     } else {
                         $("#formData :input").prop("disabled", true);
                         $('#errorMessage').removeClass('d-none');

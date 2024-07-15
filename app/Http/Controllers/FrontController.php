@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ukm;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -13,7 +14,9 @@ class FrontController extends Controller
 
     public function ukm()
     {
-        return view('front.ukm');
+        $ukm = Ukm::get();
+
+        return view('front.ukm', compact('ukm'));
     }
 
     public function login()

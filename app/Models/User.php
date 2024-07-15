@@ -23,11 +23,13 @@ class User extends Authenticatable
         'npm',
         'jenis_kelamin',
         'whatsapp',
-        'jurusan',
         'angkatan',
         'alamat',
         'password',
         'role',
+        'ukm_id',
+        'prodi_id',
+        'jurusan_id'
     ];
 
     /**
@@ -48,4 +50,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function ukm(){
+        return $this->belongsTo(Ukm::class, "ukm_id");
+    }
+
+    public function prodi(){
+        return $this->belongsTo(Prodi::class, "prodi_id");
+    }
+
+    public function getjurusan(){
+        return $this->belongsTo(Jurusan::class, "jurusan_id");
+    }
 }

@@ -23,24 +23,14 @@
                         </div>
 					  </div>
                 </div>
-				<div class="col-md-4">
-                    <div class="full blog_img_popular">
-                       <img class="img-responsive" src="/front/images/p1.png" alt="#" />
-					   <h4>Financial Accounting</h4>
+                @foreach ($ukm as $value)
+                    <div class="col-md-4">
+                        <div class="full blog_img_popular">
+                        <img class="img-responsive" src="{{ $value->logo }}" alt="#" />
+                        <h4>{{ $value->ukmNama }}</h4>
+                        </div>
                     </div>
-                </div>
-				<div class="col-md-4">
-                    <div class="full blog_img_popular">
-                        <img class="img-responsive" src="/front/images/p2.png" alt="#" />
-						<h4>Managerial Accounting</h4>
-                    </div>
-                </div>
-				<div class="col-md-4">
-                    <div class="full blog_img_popular">
-                        <img class="img-responsive" src="/front/images/p3.png" alt="#" />
-						<h4>Intermediate Accounting</h4>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

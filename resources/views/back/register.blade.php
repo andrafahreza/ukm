@@ -19,20 +19,28 @@
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                            @if ($errors->any())
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Error!</strong>  {{ $errors->first() }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+
                             <center>
                                 <h4>Register Page</h4>
                             </center>
-                            <form class="pt-3">
+                            <form class="pt-3" action="{{ route('registered') }}" method="POST">
+                                @csrf
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg" id="nama_lengkap" placeholder="Nama Lengkap">
+                                    <input type="text" class="form-control form-control-lg" id="nama_lengkap" placeholder="Nama Lengkap" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" class="form-control form-control-lg" name="npm" id="npm" placeholder="NPM">
+                                    <input type="number" class="form-control form-control-lg" name="npm" id="npm" placeholder="NPM" required>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <input type="radio" name="jenis_kelamin" value="Laki-Laki"> Laki-Laki &nbsp;
+                                            <input type="radio" name="jenis_kelamin" value="Laki-Laki" required> Laki-Laki &nbsp;
                                         </div>
                                         <div class="col-md-6">
                                             <input type="radio" name="jenis_kelamin" value="Perempuan"> Perempuan
@@ -40,23 +48,23 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg" name="no_whatsapp" id="no_whatsapp" placeholder="No. Whatsapp">
+                                    <input type="text" class="form-control form-control-lg" name="no_whatsapp" id="no_whatsapp" placeholder="No. Whatsapp" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-lg" name="email" id="email" placeholder="Email">
+                                    <input type="email" class="form-control form-control-lg" name="email" id="email" placeholder="Email" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg" name="jurusan" id="jurusan" placeholder="Jurusan">
+                                    <input type="text" class="form-control form-control-lg" name="jurusan" id="jurusan" placeholder="Jurusan" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg" name="angkatan" id="angkatan" placeholder="Angkatan">
+                                    <input type="text" class="form-control form-control-lg" name="angkatan" id="angkatan" placeholder="Angkatan" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg" name="alamat" id="alamat" placeholder="Alamat">
+                                    <input type="text" class="form-control form-control-lg" name="alamat" id="alamat" placeholder="Alamat" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-lg"
-                                        id="exampleInputPassword1" placeholder="Password">
+                                        id="exampleInputPassword1" placeholder="Password" required>
                                 </div>
                                 <div class="mt-3">
                                     <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" style="width: 100%">Register</button>
