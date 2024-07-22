@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prodi;
 use App\Models\Ukm;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,8 @@ class FrontController extends Controller
 
     public function register()
     {
-        return view('back.register');
+        $prodi = Prodi::get();
+
+        return view('back.register', compact('prodi'));
     }
 }

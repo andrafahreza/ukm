@@ -62,10 +62,20 @@
                         <li><a class="nav-link" href="{{ route('list-ukm') }}">Ukm</a></li>
                         @if (Auth::check())
                             @if (Auth::user()->role == "mahasiswa")
-                                <li><a class="nav-link" href="courses.html">Pendaftaran</a></li>
+                                <li><a class="nav-link" href="{{ route('pendaftaran') }}">Pendaftaran</a></li>
                             @endif
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ Auth::user()->nama_lengkap }}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{ route('profil-mahasiswa') }}">Profil</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                                </div>
+                            </div>
+                        @else
+                            <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                         @endif
-                        <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                     </ul>
                 </div>
             </div>

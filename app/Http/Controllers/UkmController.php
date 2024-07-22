@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PengurusUkm;
 use App\Models\Prodi;
 use App\Models\Ukm;
+use App\Models\UkmUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -277,5 +278,18 @@ class UkmController extends Controller
             DB::rollBack();
             return redirect()->back()->withErrors($th->getMessage());
         }
+    }
+
+    // Anggota UKM
+    public function anggota_ukm()
+    {
+        if (Auth::user()->role != "ukm") {
+            abort(404);
+        }
+
+        $title = "anggota_ukm";
+        $data = UkmUser::where('ukm_id', Auth::user()->ukm_id)->latest()->get();
+
+        return view('back.pages.anggota-ukm', compact('title', 'data'));
     }
 }

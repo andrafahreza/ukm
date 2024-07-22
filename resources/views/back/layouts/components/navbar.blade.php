@@ -10,8 +10,8 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/back/index.html">
+        <li class="nav-item @if ($title == 'data_pendaftaran') active @endif">
+            <a class="nav-link" href="{{ route('list-pendaftaran') }}">
                 <i class="mdi mdi-view-quilt menu-icon"></i>
                 <span class="menu-title">Data Pendaftar</span>
             </a>
@@ -38,6 +38,12 @@
                 <a class="nav-link" href="{{ route('profil-ukm') }}">
                     <i class="mdi mdi-view-quilt menu-icon"></i>
                     <span class="menu-title">Profil UKM</span>
+                </a>
+            </li>
+            <li class="nav-item @if ($title == 'anggota_ukm') active @endif">
+                <a class="nav-link" href="{{ route('anggota-ukm') }}">
+                    <i class="mdi mdi-view-quilt menu-icon"></i>
+                    <span class="menu-title">Anggota UKM</span>
                 </a>
             </li>
         @endif
