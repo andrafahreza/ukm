@@ -55,6 +55,10 @@ class User extends Authenticatable
         return $this->belongsTo(Ukm::class, "ukm_id");
     }
 
+    public function ukmUser(){
+        return $this->belongsTo(UkmUser::class, 'id', 'user_id');
+    }
+
     public function prodi(){
         return $this->belongsTo(Prodi::class, "prodi_id");
     }

@@ -25,10 +25,12 @@
                 </div>
                 @foreach ($ukm as $value)
                     <div class="col-md-4">
-                        <div class="full blog_img_popular">
-                        <img class="img-responsive" src="{{ $value->logo }}" alt="#" />
-                        <h4>{{ $value->ukmNama }}</h4>
-                        </div>
+                        <a href="{{ route('list-ukm', ['id' => $value->id]) }}">
+                            <div class="full blog_img_popular">
+                            <img class="img-responsive" src="{{ $value->logo }}" alt="#" />
+                            <h4>{{ $value->ukmNama }}</h4>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
             </div>

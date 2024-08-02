@@ -44,7 +44,7 @@
     <!-- inject:js -->
     <script src="/back/js/off-canvas.js"></script>
     <script src="/back/js/hoverable-collapse.js"></script>
-    {{-- <script src="/back/js/template.js"></script> --}}
+    <script src="/back/js/template.js"></script>
     <!-- endinject -->
     <!-- plugin js for this page -->
     <script src="/back/js/jquery.cookie.js" type="text/javascript"></script>

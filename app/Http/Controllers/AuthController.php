@@ -99,7 +99,7 @@ class AuthController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with("success", "Berhasil melakukan pendaftaran akun, silahkan login");
+            return redirect()->back()->with("success", "Berhasil update data profil");
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->withErrors($th->getMessage());
@@ -135,5 +135,14 @@ class AuthController extends Controller
             DB::rollBack();
             return redirect()->back()->withErrors($th->getMessage());
         }
+    }
+
+    public function user()
+    {
+        $title = "data_user";
+        $data = User::get();
+
+        return view('back.pages.user', compact('title', 'data'));
+
     }
 }

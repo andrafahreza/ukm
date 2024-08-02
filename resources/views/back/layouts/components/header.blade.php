@@ -36,7 +36,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                     aria-labelledby="profileDropdown">
-                    <a class="dropdown-item">
+                    <a href="{{ route('profil-setting') }}" class="dropdown-item">
                         <i class="mdi mdi-settings text-primary"></i>
                         Profile
                     </a>

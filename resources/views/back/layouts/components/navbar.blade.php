@@ -16,6 +16,12 @@
                 <span class="menu-title">Data Pendaftar</span>
             </a>
         </li>
+        <li class="nav-item @if ($title == 'data_user') active @endif">
+            <a class="nav-link" href="{{ route('list-user') }}">
+                <i class="mdi mdi-view-quilt menu-icon"></i>
+                <span class="menu-title">Data User</span>
+            </a>
+        </li>
         <li class="nav-item sidebar-category">
             <p>Data Master</p>
             <span></span>
@@ -44,6 +50,12 @@
                 <a class="nav-link" href="{{ route('anggota-ukm') }}">
                     <i class="mdi mdi-view-quilt menu-icon"></i>
                     <span class="menu-title">Anggota UKM</span>
+                </a>
+            </li>
+            <li class="nav-item @if ($title == 'validasi_pembayaran') active @endif">
+                <a class="nav-link" href="{{ route('validasi-pembayaran') }}">
+                    <i class="mdi mdi-view-quilt menu-icon"></i>
+                    <span class="menu-title">Validasi Pembayaran</span>
                 </a>
             </li>
         @endif

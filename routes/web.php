@@ -4,14 +4,16 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\PembayaranMahasiswaController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UkmController;
 use App\Http\Controllers\UkmUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'index'])->name('index');
-Route::get('list-ukm', [FrontController::class, 'ukm'])->name('list-ukm');
+Route::get('list-ukm/{id?}', [FrontController::class, 'ukm'])->name('list-ukm');
 
 Route::get('login', [FrontController::class, 'login'])->name('login')->middleware('guest');
 Route::post('login', [AuthController::class, 'auth'])->name('authentication');
@@ -30,8 +32,20 @@ Route::middleware('auth')->group(function() {
         Route::post('daftar', [PendaftaranController::class, 'daftar'])->name("daftar");
     });
 
+    Route::prefix("pembayaran")->group(function() {
+        Route::get('/', [PembayaranMahasiswaController::class, 'pembayaran'])->name("pembayaran");
+        Route::post('/', [PembayaranMahasiswaController::class, 'bayar'])->name("bayar");
+    });
+
     Route::middleware('notMahasiswa')->group(function() {
         Route::get('/home', [HomeController::class, 'home'])->name("home");
+        Route::get('/list-user', [AuthController::class, 'user'])->name("list-user");
+
+        Route::prefix("profile-setting")->group(function() {
+            Route::get('/', [ProfileController::class, 'index'])->name("profil-setting");
+            Route::post('/', [ProfileController::class, 'update'])->name("update-profil");
+            Route::post('ganti-password', [ProfileController::class, 'ganti_password'])->name("ganti-password-profil");
+        });
 
         Route::prefix("list-pendaftaran")->group(function() {
             Route::get('/', [PendaftaranController::class, 'list'])->name("list-pendaftaran");
@@ -75,7 +89,12 @@ Route::middleware('auth')->group(function() {
 
         Route::prefix("anggota-ukm")->group(function() {
             Route::get('/', [UkmController::class, 'anggota_ukm'])->name("anggota-ukm");
+        });
 
+        Route::prefix("validasi-pembayaran")->group(function() {
+            Route::get('/', [PembayaranMahasiswaController::class, 'validasi_pembayaran'])->name("validasi-pembayaran");
+            Route::post('terima-pembayaran', [PembayaranMahasiswaController::class, 'terima'])->name("terima-pembayaran");
+            Route::post('tolak-pembayaran', [PembayaranMahasiswaController::class, 'tolak'])->name("tolak-pembayaran");
         });
     });
 });

@@ -70,6 +70,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('profil-mahasiswa') }}">Profil</a>
+                                    <a class="dropdown-item" href="{{ route('pembayaran') }}">Pembayaran UKM</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                                 </div>
                             </div>

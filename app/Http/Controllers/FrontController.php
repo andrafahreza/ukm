@@ -13,11 +13,17 @@ class FrontController extends Controller
         return view('front.index');
     }
 
-    public function ukm()
+    public function ukm($id = null)
     {
-        $ukm = Ukm::get();
+        if ($id == null) {
+            $ukm = Ukm::get();
 
-        return view('front.ukm', compact('ukm'));
+            return view('front.ukm', compact('ukm'));
+        } else {
+            $ukm = Ukm::findOrFail($id);
+
+            return view('front.ukm-detail', compact('ukm'));
+        }
     }
 
     public function login()
