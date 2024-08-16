@@ -29,7 +29,8 @@ class User extends Authenticatable
         'role',
         'ukm_id',
         'prodi_id',
-        'jurusan_id'
+        'jurusan_id',
+        'status'
     ];
 
     /**

@@ -35,15 +35,17 @@
             </div>
             <div class="col-md-3 grid-margin stretch-card">
                 <div class="card bg-twitter d-flex align-items-center">
-                    <div class="card-body py-5">
-                        <div
-                            class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
-                            <i class="mdi mdi-account-multiple text-white icon-lg"></i>
-                            <div class="ms-3 ml-md-0 ml-xl-3">
-                                <h5 class="text-white font-weight-bold">Data Mahasiswa</h5>
+                    <a href="{{ route('list-mahasiswa') }}">
+                        <div class="card-body py-5">
+                            <div
+                                class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                                <i class="mdi mdi-account-multiple text-white icon-lg"></i>
+                                <div class="ms-3 ml-md-0 ml-xl-3">
+                                    <h5 class="text-white font-weight-bold">Data Mahasiswa</h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="col-md-3 grid-margin stretch-card">

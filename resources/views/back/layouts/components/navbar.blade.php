@@ -22,6 +22,12 @@
                 <span class="menu-title">Data User</span>
             </a>
         </li>
+        <li class="nav-item @if ($title == 'data_mahasiswa') active @endif">
+            <a class="nav-link" href="{{ route('list-mahasiswa') }}">
+                <i class="mdi mdi-view-quilt menu-icon"></i>
+                <span class="menu-title">Data Mahasiswa</span>
+            </a>
+        </li>
         <li class="nav-item sidebar-category">
             <p>Data Master</p>
             <span></span>
@@ -37,6 +43,12 @@
                 <a class="nav-link" href="{{ route('prodi') }}">
                     <i class="mdi mdi-view-quilt menu-icon"></i>
                     <span class="menu-title">Prodi</span>
+                </a>
+            </li>
+            <li class="nav-item @if ($title == 'dokumentasi') active @endif">
+                <a class="nav-link" href="{{ route('dokumentasi') }}">
+                    <i class="mdi mdi-view-quilt menu-icon"></i>
+                    <span class="menu-title">Dokumentasi</span>
                 </a>
             </li>
         @else
@@ -58,6 +70,18 @@
                     <span class="menu-title">Validasi Pembayaran</span>
                 </a>
             </li>
+            <li class="nav-item @if ($title == 'sertifikat') active @endif">
+                <a class="nav-link" href="{{ route('sertifikat') }}">
+                    <i class="mdi mdi-view-quilt menu-icon"></i>
+                    <span class="menu-title">Sertifikat</span>
+                </a>
+            </li>
         @endif
+        <li class="nav-item @if ($title == 'video') active @endif">
+            <a class="nav-link" href="{{ route('video') }}">
+                <i class="mdi mdi-view-quilt menu-icon"></i>
+                <span class="menu-title">Video</span>
+            </a>
+        </li>
     </ul>
 </nav>

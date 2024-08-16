@@ -61,16 +61,18 @@
                         <li><a class="nav-link active" href="{{ route('index') }}">Home</a></li>
                         <li><a class="nav-link" href="{{ route('list-ukm') }}">Ukm</a></li>
                         @if (Auth::check())
-                            @if (Auth::user()->role == "mahasiswa")
+                            @if (Auth::user()->role == 'mahasiswa')
                                 <li><a class="nav-link" href="{{ route('pendaftaran') }}">Pendaftaran</a></li>
                             @endif
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->nama_lengkap }}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('profil-mahasiswa') }}">Profil</a>
                                     <a class="dropdown-item" href="{{ route('pembayaran') }}">Pembayaran UKM</a>
+                                    <a class="dropdown-item" href="{{ route('sertifikat-mahasiswa') }}">Sertifikat</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                                 </div>
                             </div>
@@ -85,6 +87,64 @@
     <!-- End header -->
 
     @yield('content')
+
+    <footer class="footer-box">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="footer_blog">
+                        <div class="full margin-bottom_30">
+                            <img src="https://ust.ac.id/wp-content/uploads/2021/04/logo-Footer-300x300.png" alt="#" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="footer_blog footer_menu white_fonts">
+                        <h3>Kampus I</h3>
+                        <p><small>Jalan Setia Budi No.479 F, Tanjung Sari Medan <br>
+                        Telepon : (061) 821 0161 <br>
+                        Fax : (061) 821 3269 </small></p>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="footer_blog full white_fonts">
+                        <h3>Kampus II</h3>
+                        <p><small>Jalan Mataram No. 21 Perisah Hulu, Medan Baru - Kota Medan <br>
+                            Telepon : (061) 821 0161 <br>
+                            Fax : (061) 821 3269 </small></p>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="footer_blog full white_fonts">
+                        <h3>Sosial Media</h3>
+                        <ul class="full">
+                            <li><a href="https://www.facebook.com/UNIKASANTOTHOMAS/" target="_blank"><i class="fa fa-facebook"></i> UNIKASANTOTHOMAS</a></li>
+                            <li><a href="https://www.youtube.com/@unikasantothomas" target="_blank"><i class="fa fa-youtube"></i> unikasantothomas</a></li>
+                            <li><a href="https://www.instagram.com/unika.santothomas/" target="_blank"><i class="fa fa-instagram"></i> unika.santothomas</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <div class="footer_bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="crp">© Copyrights 2024 </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
 

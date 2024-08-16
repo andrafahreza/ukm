@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
+use App\Models\Prodi;
+use App\Models\UkmUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +55,10 @@ class AuthController extends Controller
 
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
+
+                if (Auth::user()->status == "nonactive") {
+                    throw new \Exception("Akun anda dinonaktifkan, silahkan hubungi administrator untuk mengaktifkan kembali");
+                }
 
                 if (Auth::user()->role != "mahasiswa") {
                     return redirect()->intended("home");
@@ -140,9 +147,79 @@ class AuthController extends Controller
     public function user()
     {
         $title = "data_user";
-        $data = User::get();
+        $data = User::whereNot('role', 'admin')->get();
+        $prodi = Prodi::get();
+        $jurusan = Jurusan::get();
 
-        return view('back.pages.user', compact('title', 'data'));
+        return view('back.pages.user', compact('title', 'data', 'prodi', 'jurusan'));
+    }
 
+    public function nonactive_user(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $data = User::findOrFail($request->id);
+            $data->status = "nonactive";
+            $data->update();
+
+            DB::commit();
+
+            return redirect()->back()->with("success", "Berhasil memperbarui password");
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->withErrors($th->getMessage());
+        }
+    }
+
+    public function reset_user(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $data = User::findOrFail($request->id);
+            $data->password = Hash::make("password");
+            $data->update();
+
+            DB::commit();
+
+            return redirect()->back()->with("success", "Berhasil memperbarui password");
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->withErrors($th->getMessage());
+        }
+    }
+
+    public function active_user(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $data = User::findOrFail($request->id);
+            $data->status = "active";
+            $data->update();
+
+            DB::commit();
+
+            return redirect()->back()->with("success", "Berhasil memperbarui password");
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->withErrors($th->getMessage());
+        }
+    }
+
+    public function mahasiswa()
+    {
+        $title = "data_mahasiswa";
+        $data = User::where('role', 'mahasiswa')
+        ->where(function($query) {
+            if (Auth::user()->role == "ukm") {
+                $ukmUser = UkmUser::select('user_id')->where('ukm_id', Auth::user()->ukm_id)->get();
+                $query->whereIn('id', $ukmUser);
+            }
+        })
+        ->get();
+
+        return view('back.pages.mahasiswa', compact('title', 'data'));
     }
 }

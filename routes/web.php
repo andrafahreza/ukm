@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
@@ -8,8 +9,10 @@ use App\Http\Controllers\PembayaranMahasiswaController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\UkmController;
 use App\Http\Controllers\UkmUserController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'index'])->name('index');
@@ -26,6 +29,7 @@ Route::middleware('auth')->group(function() {
     Route::get('profil-mahasiswa', [UkmUserController::class, 'profil_mahasiswa'])->name("profil-mahasiswa");
     Route::post('profil-mahasiswa', [AuthController::class, 'update_profil_mahasiswa'])->name("update-profil-mahasiswa");
     Route::post('ganti-password-mahasiswa', [AuthController::class, 'ganti_password_mahasiswa'])->name("ganti-password-mahasiswa");
+    Route::get('sertifikat-mahasiswa', [SertifikatController::class, 'sertifikat_mahasiswa'])->name("sertifikat-mahasiswa");
 
     Route::prefix("pendaftaran")->group(function() {
         Route::get('/', [PendaftaranController::class, 'index'])->name("pendaftaran");
@@ -40,6 +44,10 @@ Route::middleware('auth')->group(function() {
     Route::middleware('notMahasiswa')->group(function() {
         Route::get('/home', [HomeController::class, 'home'])->name("home");
         Route::get('/list-user', [AuthController::class, 'user'])->name("list-user");
+        Route::post('/nonactive-user', [AuthController::class, 'nonactive_user'])->name("nonactive-user");
+        Route::post('/active-user', [AuthController::class, 'active_user'])->name("active-user");
+        Route::post('/reset-user', [AuthController::class, 'reset_user'])->name("reset-user");
+        Route::get('/list-mahasiswa', [AuthController::class, 'mahasiswa'])->name("list-mahasiswa");
 
         Route::prefix("profile-setting")->group(function() {
             Route::get('/', [ProfileController::class, 'index'])->name("profil-setting");
@@ -95,6 +103,29 @@ Route::middleware('auth')->group(function() {
             Route::get('/', [PembayaranMahasiswaController::class, 'validasi_pembayaran'])->name("validasi-pembayaran");
             Route::post('terima-pembayaran', [PembayaranMahasiswaController::class, 'terima'])->name("terima-pembayaran");
             Route::post('tolak-pembayaran', [PembayaranMahasiswaController::class, 'tolak'])->name("tolak-pembayaran");
+        });
+
+        Route::prefix("sertifikat-admin")->group(function() {
+            Route::get('/', [SertifikatController::class, 'index'])->name("sertifikat");
+            Route::get('show/{id?}', [SertifikatController::class, 'show'])->name("sertifikat-show");
+            Route::post('simpan/{id?}', [SertifikatController::class, 'simpan'])->name("sertifikat-simpan");
+            Route::post('hapus/{id?}', [SertifikatController::class, 'hapus'])->name("sertifikat-hapus");
+        });
+
+        Route::prefix("dokumentasi-admin")->group(function() {
+            Route::get('/', [DokumentasiController::class, 'index'])->name("dokumentasi");
+            Route::get('show/{id?}', [DokumentasiController::class, 'show'])->name("dokumentasi-show");
+            Route::post('simpan/{id?}', [DokumentasiController::class, 'simpan'])->name("dokumentasi-simpan");
+            Route::post('hapus/{id?}', [DokumentasiController::class, 'hapus'])->name("dokumentasi-hapus");
+        });
+
+        Route::prefix("video-admin")->group(function() {
+            Route::get('/', [VideoController::class, 'index'])->name("video");
+            Route::get('show/{id?}', [VideoController::class, 'show'])->name("video-show");
+            Route::post('simpan/{id?}', [VideoController::class, 'simpan'])->name("video-simpan");
+            Route::post('hapus/{id?}', [VideoController::class, 'hapus'])->name("video-hapus");
+            Route::post('tolak/{id?}', [VideoController::class, 'tolak'])->name("video-tolak");
+            Route::post('terima/{id?}', [VideoController::class, 'terima'])->name("video-terima");
         });
     });
 });
