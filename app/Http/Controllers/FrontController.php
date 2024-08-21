@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AgendaUkm;
+use App\Models\Berita;
 use App\Models\Dokumentasi;
+use App\Models\Pengumuman;
 use App\Models\Prodi;
 use App\Models\Ukm;
 use App\Models\Video;
@@ -23,8 +26,50 @@ class FrontController extends Controller
 
             $video[$kunci]['video'][] = $value;
         }
+        $pengumuman = Pengumuman::where('status', 'diterima')->latest()->limit(8)->get();
+        $berita = Berita::where('status', 'diterima')->latest()->limit(4)->get();
+        $agenda = AgendaUkm::where('status', 'diterima')->latest()->limit(4)->get();
 
-        return view('front.index', compact('dokumentasi', 'video'));
+        return view('front.index', compact('dokumentasi', 'video', 'pengumuman', 'berita', 'agenda'));
+    }
+
+    public function pengumuman($id = null)
+    {
+        if ($id == null) {
+            $pengumuman = Pengumuman::where('status', 'diterima')->get();
+
+            return view('front.pengumuman', compact('pengumuman'));
+        } else {
+            $pengumuman = Pengumuman::findOrFail($id);
+
+            return view('front.pengumuman-detail', compact('pengumuman'));
+        }
+    }
+
+    public function berita($id = null)
+    {
+        if ($id == null) {
+            $berita = Berita::where('status', 'diterima')->get();
+
+            return view('front.berita', compact('berita'));
+        } else {
+            $berita = Berita::findOrFail($id);
+
+            return view('front.berita-detail', compact('berita'));
+        }
+    }
+
+    public function agenda($id = null)
+    {
+        if ($id == null) {
+            $agenda = AgendaUkm::where('status', 'diterima')->get();
+
+            return view('front.agenda', compact('agenda'));
+        } else {
+            $agenda = AgendaUkm::findOrFail($id);
+
+            return view('front.agenda-detail', compact('agenda'));
+        }
     }
 
     public function ukm($id = null)

@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\AgendaUkmController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\PembayaranMahasiswaController;
 use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SertifikatController;
@@ -16,6 +19,9 @@ use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'index'])->name('index');
+Route::get('list-pengumuman/{id?}', [FrontController::class, 'pengumuman'])->name('list-pengumuman');
+Route::get('list-berita/{id?}', [FrontController::class, 'berita'])->name('list-berita');
+Route::get('list-agenda/{id?}', [FrontController::class, 'agenda'])->name('list-agenda');
 Route::get('list-ukm/{id?}', [FrontController::class, 'ukm'])->name('list-ukm');
 
 Route::get('login', [FrontController::class, 'login'])->name('login')->middleware('guest');
@@ -126,6 +132,33 @@ Route::middleware('auth')->group(function() {
             Route::post('hapus/{id?}', [VideoController::class, 'hapus'])->name("video-hapus");
             Route::post('tolak/{id?}', [VideoController::class, 'tolak'])->name("video-tolak");
             Route::post('terima/{id?}', [VideoController::class, 'terima'])->name("video-terima");
+        });
+
+        Route::prefix("pengumuman-admin")->group(function() {
+            Route::get('/', [PengumumanController::class, 'index'])->name("pengumuman");
+            Route::get('show/{id?}', [PengumumanController::class, 'show'])->name("pengumuman-show");
+            Route::post('simpan/{id?}', [PengumumanController::class, 'simpan'])->name("pengumuman-simpan");
+            Route::post('hapus/{id?}', [PengumumanController::class, 'hapus'])->name("pengumuman-hapus");
+            Route::post('tolak/{id?}', [PengumumanController::class, 'tolak'])->name("pengumuman-tolak");
+            Route::post('terima/{id?}', [PengumumanController::class, 'terima'])->name("pengumuman-terima");
+        });
+
+        Route::prefix("berita-admin")->group(function() {
+            Route::get('/', [BeritaController::class, 'index'])->name("berita");
+            Route::get('show/{id?}', [BeritaController::class, 'show'])->name("berita-show");
+            Route::post('simpan/{id?}', [BeritaController::class, 'simpan'])->name("berita-simpan");
+            Route::post('hapus/{id?}', [BeritaController::class, 'hapus'])->name("berita-hapus");
+            Route::post('tolak/{id?}', [BeritaController::class, 'tolak'])->name("berita-tolak");
+            Route::post('terima/{id?}', [BeritaController::class, 'terima'])->name("berita-terima");
+        });
+
+        Route::prefix("agenda-ukm-admin")->group(function() {
+            Route::get('/', [AgendaUkmController::class, 'index'])->name("agenda");
+            Route::get('show/{id?}', [AgendaUkmController::class, 'show'])->name("agenda-show");
+            Route::post('simpan/{id?}', [AgendaUkmController::class, 'simpan'])->name("agenda-simpan");
+            Route::post('hapus/{id?}', [AgendaUkmController::class, 'hapus'])->name("agenda-hapus");
+            Route::post('tolak/{id?}', [AgendaUkmController::class, 'tolak'])->name("agenda-tolak");
+            Route::post('terima/{id?}', [AgendaUkmController::class, 'terima'])->name("agenda-terima");
         });
     });
 });

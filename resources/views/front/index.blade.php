@@ -111,43 +111,47 @@
                 <div class="col-md-6">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                            <h2><span>Pengumuman</span></h2>
+                            <a href="{{ route('list-pengumuman') }}">
+                                <h2><span>Pengumuman</span></h2>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                            <h2><span>Berita</span></h2>
+                            <a href="{{ route('list-berita') }}">
+                                <h2><span>Berita</span></h2>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="row align-items-center bg-white p-2 m-2 rounded shadow">
-                        <div class="col-md-12">
-                            <h2>Important Announcement</h2>
-                        </div>
-                    </div>
-                    <div class="row align-items-center bg-white p-2 m-2 rounded shadow">
-                        <div class="col-md-12">
-                            <h2>Important Announcement</h2>
-                        </div>
-                    </div>
+                    @foreach ($pengumuman as $item)
+                        <a href="{{ route('list-pengumuman', ['id' => $item->id]) }}">
+                            <div class="row align-items-center bg-white p-2 m-2 rounded shadow">
+                                <div class="col-md-12">
+                                    <h2>{{ $item->judul }}</h2>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
                 </div>
                 <div class="col-lg-6">
-                    <div class="row align-items-center bg-white p-2 rounded shadow">
-                        <!-- Announcement Image -->
-                        <div class="col-md-3">
-                            <img src="https://via.placeholder.com/300" class="img-fluid rounded" alt="Announcement Image">
+                    @foreach ($berita as $item)
+                        <div class="row align-items-center bg-white p-2 rounded shadow">
+                            <div class="col-md-3">
+                                <img src="{{ asset('berita'. $item->foto) }}" class="img-fluid rounded" alt="Berita Image">
+                            </div>
+                            <!-- Announcement Content -->
+                            <div class="col-md-9">
+                                <h2 class="mb-2">{{ $item->judul }}</h2>
+                                <a href="{{ route('list-berita', ['id' => $item->id]) }}" class="btn btn-sm btn-primary">Lihat Selengkapnya</a>
+                            </div>
                         </div>
-                        <!-- Announcement Content -->
-                        <div class="col-md-9">
-                            <h2 class="mb-2">Important Announcement</h2>
-                            <a href="#" class="btn btn-primary">Read More</a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -159,23 +163,24 @@
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                            <h2><span>Agenda Ukm</span></h2>
+                            <a href="{{ route('list-agenda') }}">
+                                <h2><span>Agenda Ukm</span></h2>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="row align-items-center bg-white p-2 m-2 rounded shadow">
-                        <div class="col-md-12">
-                            <h2>Important Announcement</h2>
-                        </div>
-                    </div>
-                    <div class="row align-items-center bg-white p-2 m-2 rounded shadow">
-                        <div class="col-md-12">
-                            <h2>Important Announcement</h2>
-                        </div>
-                    </div>
+                    @foreach ($agenda as $item)
+                        <a href="{{ route('list-agenda', ['id' => $item->id]) }}">
+                            <div class="row align-items-center bg-white p-2 m-2 rounded shadow">
+                                <div class="col-md-12">
+                                    <h2>{{ $item->judul }}</h2>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </div>

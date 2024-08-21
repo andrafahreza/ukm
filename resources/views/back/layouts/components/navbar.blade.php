@@ -83,5 +83,23 @@
                 <span class="menu-title">Video</span>
             </a>
         </li>
+        <li class="nav-item @if ($title == 'pengumuman') active @endif">
+            <a class="nav-link" href="{{ route('pengumuman') }}">
+                <i class="mdi mdi-view-quilt menu-icon"></i>
+                <span class="menu-title">Pengumuman</span>
+            </a>
+        </li>
+        <li class="nav-item @if ($title == 'berita') active @endif">
+            <a class="nav-link" href="{{ route('berita') }}">
+                <i class="mdi mdi-view-quilt menu-icon"></i>
+                <span class="menu-title">Berita</span>
+            </a>
+        </li>
+        <li class="nav-item @if ($title == 'agenda') active @endif">
+            <a class="nav-link" href="{{ route('agenda') }}">
+                <i class="mdi mdi-view-quilt menu-icon"></i>
+                <span class="menu-title">Agenda Ukm</span>
+            </a>
+        </li>
     </ul>
 </nav>

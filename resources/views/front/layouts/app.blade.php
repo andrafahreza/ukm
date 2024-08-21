@@ -59,6 +59,9 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                     <ul class="navbar-nav">
                         <li><a class="nav-link active" href="{{ route('index') }}">Home</a></li>
+                        <li><a class="nav-link" href="{{ route('list-pengumuman') }}">Pengumuman</a></li>
+                        <li><a class="nav-link" href="{{ route('list-berita') }}">Berita</a></li>
+                        <li><a class="nav-link" href="{{ route('list-agenda') }}">Agenda</a></li>
                         <li><a class="nav-link" href="{{ route('list-ukm') }}">Ukm</a></li>
                         @if (Auth::check())
                             @if (Auth::user()->role == 'mahasiswa')
