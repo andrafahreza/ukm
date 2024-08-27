@@ -101,5 +101,15 @@
                 <span class="menu-title">Agenda Ukm</span>
             </a>
         </li>
+        {{-- <li class="nav-item sidebar-category">
+            <p>Laporan</p>
+            <span></span>
+        </li>
+        <li class="nav-item @if ($title == 'laporan-ukm') active @endif">
+            <a class="nav-link" href="{{ route('laporan-ukm') }}">
+                <i class="mdi mdi-view-quilt menu-icon"></i>
+                <span class="menu-title">Laporan UKM</span>
+            </a>
+        </li> --}}
     </ul>
 </nav>

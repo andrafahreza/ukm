@@ -7,6 +7,7 @@ use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PembayaranMahasiswaController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PengumumanController;
@@ -159,6 +160,11 @@ Route::middleware('auth')->group(function() {
             Route::post('hapus/{id?}', [AgendaUkmController::class, 'hapus'])->name("agenda-hapus");
             Route::post('tolak/{id?}', [AgendaUkmController::class, 'tolak'])->name("agenda-tolak");
             Route::post('terima/{id?}', [AgendaUkmController::class, 'terima'])->name("agenda-terima");
+        });
+
+        Route::prefix("laporan")->group(function() {
+            Route::get('cetak-laporan-mahasiswa', [LaporanController::class, 'cetakLaporanMahasiswa'])->name("cetak-laporan-mahasiswa");
+            Route::get('laporan-ukm', [LaporanController::class, 'laporanUkm'])->name("laporan-ukm");
         });
     });
 });
