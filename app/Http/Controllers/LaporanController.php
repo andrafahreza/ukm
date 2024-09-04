@@ -21,4 +21,17 @@ class LaporanController extends Controller
         ->setOptions(['isRemoteEnabled' => true, 'isHtml5ParserEnabled' => true]);
         return $pdf->stream('laporan.pdf');
     }
+
+    public function cetakKartu($id = null)
+    {
+        $data = UkmUser::with(['user', 'ukm'])->where('user_id', Auth::user()->id)->where('ukm_id', $id)->first();
+
+        $pdf = PDF::loadView('back.pages.laporan.pdf.kartu', [
+            'data' => $data,
+            'logo' => url(asset($data->ukm->logo))
+        ])
+        ->setPaper('a4', 'landscape')
+        ->setOptions(['isRemoteEnabled' => true, 'isHtml5ParserEnabled' => true]);
+        return $pdf->stream('laporan.pdf');
+    }
 }

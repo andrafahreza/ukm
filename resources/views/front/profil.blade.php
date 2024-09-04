@@ -55,6 +55,8 @@
                             @foreach ($ukm as $item)
                                 <input type="text" class="form-control"
                                 value="{{ $item->ukm->ukmNama }}" disabled>
+                                <a href="{{ route('cetak-kartu', ['id' => $item->ukm->id]) }}" target="_blank">Cetak Kartu</a>
+                                <br>
                             @endforeach
                         @endif
                     </div>

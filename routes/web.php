@@ -17,6 +17,7 @@ use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\UkmController;
 use App\Http\Controllers\UkmUserController;
 use App\Http\Controllers\VideoController;
+use App\Models\UkmUser;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'index'])->name('index');
@@ -37,6 +38,12 @@ Route::middleware('auth')->group(function() {
     Route::post('profil-mahasiswa', [AuthController::class, 'update_profil_mahasiswa'])->name("update-profil-mahasiswa");
     Route::post('ganti-password-mahasiswa', [AuthController::class, 'ganti_password_mahasiswa'])->name("ganti-password-mahasiswa");
     Route::get('sertifikat-mahasiswa', [SertifikatController::class, 'sertifikat_mahasiswa'])->name("sertifikat-mahasiswa");
+    Route::get('cetak-kartu/{id?}', [LaporanController::class, 'cetakKartu'])->name("cetak-kartu");
+    // Route::get('test', function() {
+    //     $data = UkmUser::with(['user', 'ukm'])->where('user_id', Auth::user()->id)->where('ukm_id', 4)->first();
+    //     $logo = url(asset($data->ukm->logo));
+    //     return view('back.pages.laporan.pdf.kartu', compact('logo', 'data'));
+    // });
 
     Route::prefix("pendaftaran")->group(function() {
         Route::get('/', [PendaftaranController::class, 'index'])->name("pendaftaran");

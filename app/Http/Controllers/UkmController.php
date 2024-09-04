@@ -30,6 +30,7 @@ class UkmController extends Controller
         try {
             $data = [
                 "ukmNama" => $request->ukmNama,
+                "ketua" => $request->ketua,
                 "ukmDeskripsi" => $request->ukmDeskripsi,
                 "contact" => $request->contact
             ];

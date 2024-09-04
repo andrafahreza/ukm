@@ -15,6 +15,7 @@ class Ukm extends Model
         'ukmNama',
         'ukmDeskripsi',
         'logo',
-        'contact'
+        'contact',
+        'ketua'
     ];
 }

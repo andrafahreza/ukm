@@ -29,6 +29,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama UKM</th>
+                                    <th>Ketua</th>
                                     <th>Deskripsi UKM</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -41,6 +42,7 @@
                                             {{ $item->ukmNama }} <br>
                                             <img src="{{ $item->logo }}" width="200">
                                         </td>
+                                        <td>{{ $item->ketua }}</td>
                                         <td>{!! $item->ukmDeskripsi !!}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary" onclick="detail({{ $item->id }})" id="btnDetail">Detail</button>
@@ -76,6 +78,10 @@
                             <div class="col-md-12">
                                 <label>Nama UKM <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="ukmNama" id="ukmNama" placeholder="Masukkan Nama UKM" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label>Ketua UKM <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="ketua" id="ketua" placeholder="Masukkan Nama Ketua UKM" required>
                             </div>
                             <div class="col-md-12 mt-4">
                                 <label>Kontak <span class="text-danger">*</span></label>
@@ -166,6 +172,7 @@
                         $('#ukmNama').val(data.ukmNama);
                         $('#ukmDeskripsi').val(data.ukmDeskripsi);
                         $('#contact').val(data.contact);
+                        $('#ketua').val(data.ketua);
                     } else {
                         $("#formData :input").prop("disabled", true);
                         $('#errorMessage').removeClass('d-none');
