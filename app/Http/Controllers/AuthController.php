@@ -6,6 +6,7 @@ use App\Models\Jurusan;
 use App\Models\Prodi;
 use App\Models\UkmUser;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -99,6 +100,18 @@ class AuthController extends Controller
             ];
 
             $user = Auth::user();
+
+            if ($request->photo) {
+                $request->validate([
+                    'photo' => 'required|image|mimes:jpeg,png,jpg',
+                ]);
+
+                $imageName = time().'.'.$request->photo->extension();
+                $request->photo->move(public_path('/profile/'), $imageName);
+                $data['photo'] = "profile/$imageName";
+
+                File::delete(public_path($user->photo));
+            }
 
             if (!$user->update($data)) {
                 throw new \Exception("Terjadi kesalahan dalam menyimpan data");

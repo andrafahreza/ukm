@@ -34,14 +34,6 @@
                                     <a class="nav-link active" id="pills-pengurus-tab" data-bs-toggle="pill" href="#pills-pengurus"
                                         role="tab" aria-controls="pills-pengurus" aria-selected="true">Pengurus</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-prestasi-tab" data-bs-toggle="pill" href="#pills-prestasi"
-                                        role="tab" aria-controls="pills-prestasi" aria-selected="false">Prestasi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-kegiatan-tab" data-bs-toggle="pill" href="#pills-kegiatan"
-                                        role="tab" aria-controls="pills-kegiatan" aria-selected="false">Kegiatan</a>
-                                </li>
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-pengurus" role="tabpanel"
@@ -77,14 +69,14 @@
                                         <button class="btn btn-primary mt-4" type="submit" style="width: 100%;">Simpan</button>
                                     </form>
                                 </div>
-                                <div class="tab-pane fade" id="pills-prestasi" role="tabpanel"
+                                {{-- <div class="tab-pane fade" id="pills-prestasi" role="tabpanel"
                                     aria-labelledby="pills-prestasi-tab">
 
                                 </div>
                                 <div class="tab-pane fade" id="pills-kegiatan" role="tabpanel"
                                     aria-labelledby="pills-kegiatan-tab">
 
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>

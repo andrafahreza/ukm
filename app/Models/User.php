@@ -30,7 +30,8 @@ class User extends Authenticatable
         'ukm_id',
         'prodi_id',
         'jurusan_id',
-        'status'
+        'status',
+        'photo'
     ];
 
     /**

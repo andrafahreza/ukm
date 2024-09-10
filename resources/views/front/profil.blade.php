@@ -34,7 +34,7 @@
                 <div class="col-md-3 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                         <img class="rounded-circle mt-5" width="150px"
-                            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                            src="{{ Auth::user()->photo }}">
                         <span class="font-weight-bold">
                             {{ Auth::user()->nama_lengkap }} ({{ Auth::user()->npm }})
                         </span>
@@ -63,12 +63,16 @@
                 </div>
                 <div class="col-md-5 border-right">
                     <div class="p-3 py-5">
-                        <form action="{{ route('update-profil-mahasiswa') }}" method="POST">
+                        <form action="{{ route('update-profil-mahasiswa') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h4 class="text-right">Pengaturan</h4>
                             </div>
                             <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label class="labels">Photo Profile</label>
+                                    <input type="file" name="photo" class="form-control">
+                                </div>
                                 <div class="col-md-12">
                                     <label class="labels">Nama Lengkap</label>
                                     <input type="text" name="nama_lengkap" class="form-control"

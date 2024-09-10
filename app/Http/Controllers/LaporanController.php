@@ -30,7 +30,7 @@ class LaporanController extends Controller
             'data' => $data,
             'logo' => url(asset($data->ukm->logo))
         ])
-        ->setPaper('a4', 'landscape')
+        ->setPaper('a5', 'landscape')
         ->setOptions(['isRemoteEnabled' => true, 'isHtml5ParserEnabled' => true]);
         return $pdf->stream('laporan.pdf');
     }

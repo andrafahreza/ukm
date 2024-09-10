@@ -9,6 +9,12 @@
             padding: 16px;
             width: 415px;
             border: 1px solid black;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: auto;
+            margin-bottom: auto;
         }
 
         .kartu-peserta-seleksi p {
@@ -24,10 +30,8 @@
             display: flex;
             padding: 8pt;
             flex-direction: row;
-            margin: -16px -16px 0;
             align-items: center;
             justify-content: center;
-            border-bottom: 2px solid black;
         }
 
         .kartu-peserta-seleksi .head-wrapper .sec {
@@ -55,10 +59,6 @@
             font-weight: bold
         }
 
-        .kartu-peserta-seleksi .content-wrapper {
-            padding: 16px 0;
-        }
-
 
         .kartu-peserta-seleksi .content-wrapper tr:nth-last-child(-n+2) td:last-child {
             color: blue;
@@ -84,51 +84,31 @@
         <center>
             <div class="kartu-peserta-seleksi">
                 <div class="head-wrapper">
-                    <center>
-                        <h5>Kartu Anggota</h5>
-                    </center>
+                    <table border="0">
+                        <tr>
+                            <th style="padding: 5px">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIBo-ib2ILFRqUA4rBhQMCtXUoJEJ8EzSF3z_thm21X4krlZMyfsOtDMIDXQRuMyFY3YM&usqp=CAU">
+                            </th>
+                            <th style="padding: 5px">
+                                <h5>Universitas Katolik Santo Thomas Sumatera Utara <br> <small>Jalan Setia Budi No.479 F, Tanjung Sari</small></h5>
+                            </th>
+                        </tr>
+                    </table>
                 </div>
                 <div class="content-wrapper">
-                    <table>
+                    <center>
+                        <h5 style="font-size: 21px">Kartu Tanda <br> Anggota UKM</h5>
+                    </center>
+                    <table style="width: 100%; padding-left: 30px; padding-right: 30px">
                         <tbody>
                             <tr>
-                                <td>Unit Kegiatan Mahasiswa</td>
-                                <td>:</td>
-                                <td><strong>{{ $data->ukm->ukmNama }}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>NPM</td>
-                                <td>:</td>
-                                <td><strong>{{ $data->user->npm }}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Nama</td>
-                                <td>:</td>
-                                <td><strong>{{ $data->user->nama_lengkap }}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Jenis Kelamin</td>
-                                <td>:</td>
-                                <td><strong>{{ $data->user->jenis_kelamin }}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Jurusan</td>
-                                <td>:</td>
-                                <td><strong>{{ $data->user->getJurusan->nama_jurusan }}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Angkatan</td>
-                                <td>:</td>
-                                <td><strong>{{ $data->user->angkatan }}</strong></td>
+                                <td style="color: #000">{{ $data->user->nama_lengkap }} <br> {{ $data->user->getjurusan->nama_jurusan }} <br> {{ $data->ukm->ukmNama }}</td>
+                                <td style="align-content: right">
+                                    <img src="https://aurelia.my.id/{{ Auth::user()->photo }}" width="100" height="120">
+                                </td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="footer-wrapper">
-                    <p>Medan, {{ date('d m Y') }}</p>
-                    <p>Ketua UKM</p>
-                    <br><br>
-                    <p><strong>{{ $data->ukm->ketua }}</strong></p>
                 </div>
             </div>
         </center>

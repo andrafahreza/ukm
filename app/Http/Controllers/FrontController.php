@@ -18,9 +18,9 @@ class FrontController extends Controller
         $dokumentasi = Dokumentasi::get();
         $getvideo = Video::where('status', 'diterima')->get();
         $video = array();
+        $kunci = 0;
         foreach ($getvideo as $key => $value) {
-            $kunci = 0;
-            if ($key == 3 || $key == 6 || $key == 9 || $key == 12 || $key == 15 || $key == 18) {
+            if ($key == 2 || $key == 4 || $key == 6 || $key == 8 || $key == 10 || $key == 12) {
                 $kunci ++;
             }
 
