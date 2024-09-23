@@ -36,25 +36,70 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <div id="demo" class="carousel slide" data-ride="carousel">
-                        <!-- The slideshow -->
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    @foreach ($dokumentasi as $dok)
-                                        <div class="col-lg-3 col-md-3 col-sm-6">
-                                            <div class="full blog_img_popular">
-                                                <img class="img-responsive" src="dokumentasi/{{ $dok->file }}"
-                                                    alt="#" style="max-width: 300px" />
+                @foreach ($ukm as $uk)
+                    <div class="col-lg-12">
+                        <div class="container text-center my-3">
+                            <div class="row mx-auto my-auto">
+                                <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+                                        @php
+                                            $kunci = 0;
+                                            $getDok = [];
+                                        @endphp
+                                        @foreach ($dokumentasi->where('ukm_id', $uk->id)->get() as $key => $dok)
+                                            @php
+                                                if (
+                                                    $key == 4 ||
+                                                    $key == 8 ||
+                                                    $key == 12 ||
+                                                    $key == 16 ||
+                                                    $key == 20 ||
+                                                    $key == 24
+                                                ) {
+                                                    $kunci++;
+                                                }
+
+                                                $getDok[$kunci]['dokumentasi'][] = $dok;
+                                            @endphp
+                                        @endforeach
+                                        @foreach ($getDok as $key => $value)
+                                            <div class="carousel-item py-5 @if ($key == 0) active @endif">
+                                                <div class="row">
+                                                    @foreach ($value['dokumentasi'] as $item)
+                                                        <div class="col-sm-3">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <a href="{{ route('list-ukm', ['id' => $item->ukm_id]) }}">
+                                                                        <img src="/dokumentasi/{{ $item->file }}" width="200">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <a class="carousel-control-prev text-dark" href="#myCarousel" role="button"
+                                        data-slide="prev">
+                                        <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <span><b>{{ $uk->ukmNama }}</b></span>
+                                    <a class="carousel-control-next text-dark" href="#myCarousel" role="button"
+                                        data-slide="next">
+                                        <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -82,7 +127,8 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="full blog_img_popular">
                                                     <div class="embed-responsive embed-responsive-16by9">
-                                                        <iframe class="embed-responsive-item" src="{{ $item->url }}"></iframe>
+                                                        <iframe class="embed-responsive-item"
+                                                            src="{{ $item->url }}"></iframe>
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,7 +192,8 @@
                     @foreach ($berita as $item)
                         <div class="row align-items-center bg-white p-2 rounded shadow">
                             <div class="col-md-3">
-                                <img src="{{ asset('berita' . $item->foto) }}" class="img-fluid rounded" alt="Berita Image">
+                                <img src="{{ asset('berita' . $item->foto) }}" class="img-fluid rounded"
+                                    alt="Berita Image">
                             </div>
                             <!-- Announcement Content -->
                             <div class="col-md-9">

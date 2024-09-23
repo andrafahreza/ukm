@@ -13,7 +13,7 @@
         </div>
     </section>
 
-    <div class="section margin-top_50">
+    <div class="section margin-top_50 mb-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 layout_padding_2">
@@ -27,6 +27,21 @@
 						<div class="full">
 						   <a class="hvr-radial-out button-theme" href="{{ route('pendaftaran') }}">Daftar</a>
 						</div>
+                        <div class="full mt-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Pengurus UKM</h5>
+                                </div>
+                                <div class="card-body">
+                                    Ketua: <b>{{ $pengurus->ketua_umum }}</b> <br>
+                                    Wakil Ketua: <b>{{ $pengurus->wakil_ketua_umum }}</b> <br>
+                                    Sekretaris: <b>{{ $pengurus->sekretaris }}</b> <br>
+                                    Wakil Sekretaris: <b>{{ $pengurus->wakil_sekretaris }}</b> <br>
+                                    Bendahara: <b>{{ $pengurus->bendahara }}</b> <br>
+                                    Wakil Bendahara: <b>{{ $pengurus->wakil_bendahara }}</b> <br>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 				<div class="col-md-6">

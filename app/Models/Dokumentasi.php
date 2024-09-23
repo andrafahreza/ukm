@@ -13,5 +13,10 @@ class Dokumentasi extends Model
     protected $fillable = [
         'id',
         'file',
+        'ukm_id'
     ];
+
+    public function ukm(){
+        return $this->belongsTo(Ukm::class, "ukm_id");
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dokumentasi;
+use App\Models\Ukm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -12,10 +13,10 @@ class DokumentasiController extends Controller
     public function index()
     {
         $title = "dokumentasi";
-        $data = Dokumentasi::latest()
-        ->get();
+        $data = Dokumentasi::latest()->get();
+        $ukm = Ukm::get();
 
-        return view('back.pages.dokumentasi', compact('title', 'data'));
+        return view('back.pages.dokumentasi', compact('title', 'data', 'ukm'));
     }
 
     public function simpan(Request $request, $id = null)
@@ -37,6 +38,7 @@ class DokumentasiController extends Controller
                 File::delete(public_path($dokumentasi->file));
 
                 $dokumentasi->file = $dataFile;
+                $dokumentasi->ukm_id = $request->ukm_id;
                 if (!$dokumentasi->update()) {
                     throw new \Exception("Terjadi kesalahan saat memperbarui data");
                 }
@@ -47,6 +49,7 @@ class DokumentasiController extends Controller
 
                 $dokumentasi = Dokumentasi::create([
                     "file" => $dataFile,
+                    "ukm_id" => $request->ukm_id
                 ]);
 
                 if (!$dokumentasi->save()) {

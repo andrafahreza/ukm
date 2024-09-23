@@ -28,6 +28,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>UKM</th>
                                     <th>File</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -36,6 +37,11 @@
                                 @foreach ($data as $key => $item)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
+                                        <td>
+                                            @if ($item->ukm_id != null)
+                                                {{ $item->ukm->ukmNama }}
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="/dokumentasi/{{ $item->file }}" target="_blank">Lihat File</a>
                                         </td>
@@ -69,6 +75,17 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-12">
+                                <label>UKM <span class="text-danger">*</span></label>
+                                <select class="form-control" name="ukm_id" required>
+                                    <option value="">Pilih UKM</option>
+                                    @foreach ($ukm as $data)
+                                        <option value="{{ $data->id }}">{{ $data->ukmNama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
                             <div class="col-md-12">
                                 <label>File <span class="text-danger">*</span></label>
                                 <input type="file" class="form-control" name="file" id="file" required>

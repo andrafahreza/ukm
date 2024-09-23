@@ -6,6 +6,7 @@ use App\Models\AgendaUkm;
 use App\Models\Berita;
 use App\Models\Dokumentasi;
 use App\Models\Pengumuman;
+use App\Models\PengurusUkm;
 use App\Models\Prodi;
 use App\Models\Ukm;
 use App\Models\Video;
@@ -15,7 +16,9 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $dokumentasi = Dokumentasi::get();
+        $ukm = Ukm::get();
+        $dokumentasi = new Dokumentasi();
+
         $getvideo = Video::where('status', 'diterima')->get();
         $video = array();
         $kunci = 0;
@@ -30,7 +33,7 @@ class FrontController extends Controller
         $berita = Berita::where('status', 'diterima')->latest()->limit(4)->get();
         $agenda = AgendaUkm::where('status', 'diterima')->latest()->limit(4)->get();
 
-        return view('front.index', compact('dokumentasi', 'video', 'pengumuman', 'berita', 'agenda'));
+        return view('front.index', compact('dokumentasi', 'video', 'pengumuman', 'berita', 'agenda', 'ukm'));
     }
 
     public function pengumuman($id = null)
@@ -80,8 +83,9 @@ class FrontController extends Controller
             return view('front.ukm', compact('ukm'));
         } else {
             $ukm = Ukm::findOrFail($id);
+            $pengurus = PengurusUkm::where('ukm_id', $id)->first();
 
-            return view('front.ukm-detail', compact('ukm'));
+            return view('front.ukm-detail', compact('ukm', 'pengurus'));
         }
     }
 
