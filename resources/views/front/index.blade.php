@@ -36,11 +36,11 @@
                 </div>
             </div>
             <div class="row">
-                @foreach ($ukm as $uk)
+                @foreach ($ukm as $i => $uk)
                     <div class="col-lg-12">
                         <div class="container text-center my-3">
                             <div class="row mx-auto my-auto">
-                                <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
+                                <div id="myCarousel{{ $i }}" class="carousel slide w-100" data-ride="carousel">
                                     <div class="carousel-inner" role="listbox">
                                         @php
                                             $kunci = 0;
@@ -70,7 +70,7 @@
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <a href="{{ route('list-ukm', ['id' => $item->ukm_id]) }}">
-                                                                        <img src="/dokumentasi/{{ $item->file }}" width="200">
+                                                                        <img src="/dokumentasi/{{ $item->file }}" width="200" height="120">
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -84,13 +84,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <a class="carousel-control-prev text-dark" href="#myCarousel" role="button"
+                                    <a class="carousel-control-prev text-dark" href="#myCarousel{{ $i }}" role="button"
                                         data-slide="prev">
                                         <span class="fa fa-chevron-left" aria-hidden="true"></span>
                                         <span class="sr-only">Previous</span>
                                     </a>
                                     <span><b>{{ $uk->ukmNama }}</b></span>
-                                    <a class="carousel-control-next text-dark" href="#myCarousel" role="button"
+                                    <a class="carousel-control-next text-dark" href="#myCarousel{{ $i }}" role="button"
                                         data-slide="next">
                                         <span class="fa fa-chevron-right" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span>
