@@ -21,6 +21,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
+                        <th>Judul Sertifikat</th>
                         <th>Unit Kegiatan Mahasiswa</th>
                         <th>File</th>
                     </tr>
@@ -28,6 +29,7 @@
                 <tbody>
                     @foreach ($sertifikat as $value)
                         <tr>
+                            <td>{{ $value->nama }}</td>
                             <td>{{ $value->ukm->ukmNama }}</td>
                             <td>
                                 <a href="{{ url('sertifikat'.$value->file) }}" target="_blank">Buka Dokumen</a>

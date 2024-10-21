@@ -80,7 +80,8 @@
                                 </div>
                             </div>
                         @else
-                            <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                            <li><a class="nav-link" href="{{ route('login') }}">Login Mahasiswa</a></li>
+                            <li><a class="nav-link" href="{{ route('login-umum') }}">Login Umum</a></li>
                         @endif
                     </ul>
                 </div>

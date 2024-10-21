@@ -18,7 +18,9 @@ class SertifikatController extends Controller
         ->latest()
         ->get();
 
-        return view('back.pages.sertifikat', compact('title', 'data'));
+        $users = UkmUser::where('ukm_id', Auth::user()->ukm_id)->get();
+
+        return view('back.pages.sertifikat', compact('title', 'data', 'users'));
     }
 
     public function simpan(Request $request, $id = null)
@@ -40,6 +42,8 @@ class SertifikatController extends Controller
                 File::delete(public_path($sertifikat->file));
 
                 $sertifikat->file = $dataFile;
+                $sertifikat->user_id = $request->user_id;
+                $sertifikat->nama = $request->nama;
                 if (!$sertifikat->update()) {
                     throw new \Exception("Terjadi kesalahan saat memperbarui data");
                 }
@@ -50,6 +54,8 @@ class SertifikatController extends Controller
 
                 $sertifikat = Sertifikat::create([
                     "file" => $dataFile,
+                    "nama" => $request->nama,
+                    "user_id" => $request->user_id,
                     "ukm_id" => Auth::user()->ukm_id
                 ]);
                 if (!$sertifikat->save()) {
@@ -114,7 +120,10 @@ class SertifikatController extends Controller
     public function sertifikat_mahasiswa()
     {
         $ukmUser = UkmUser::select('ukm_id')->where('user_id', Auth::user()->id)->get();
-        $sertifikat = Sertifikat::whereIn('ukm_id', $ukmUser)->get();
+        $sertifikat = Sertifikat::whereIn('ukm_id', $ukmUser)
+            ->where('user_id', null)
+            ->orWhere('user_id', Auth::user()->id)
+            ->get();
 
         return view('front.sertifikat', compact('sertifikat'));
     }

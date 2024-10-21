@@ -16,6 +16,10 @@ class Ukm extends Model
         'ukmDeskripsi',
         'logo',
         'contact',
-        'ketua'
+        'ketua',
+        'tempat',
+        'visi',
+        'misi',
+        'syarat'
     ];
 }

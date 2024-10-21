@@ -100,4 +100,14 @@ class FrontController extends Controller
 
         return view('back.register', compact('prodi'));
     }
+
+    public function login_umum()
+    {
+        return view('back.login-umum');
+    }
+
+    public function register_umum()
+    {
+        return view('back.register-umum');
+    }
 }

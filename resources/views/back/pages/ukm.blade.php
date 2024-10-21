@@ -88,8 +88,24 @@
                                 <input type="text" class="form-control" name="contact" id="contact" placeholder="Masukkan Nomor Kontak" required>
                             </div>
                             <div class="col-md-12 mt-4">
+                                <label>Tempat <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="tempat" id="tempat" placeholder="Masukkan Tempat UKM" required>
+                            </div>
+                            <div class="col-md-12 mt-4">
                                 <label>Logo <span class="text-danger logoStar">*</span></label>
                                 <input type="file" class="form-control" name="logo" id="logo" required>
+                            </div>
+                            <div class="col-md-12 mt-4">
+                                <label>Visi <span class="text-danger">*</span></label>
+                                <textarea class="form-control" name="visi" id="visi" placeholder="Masukkan Visi UKM" required></textarea>
+                            </div>
+                            <div class="col-md-12 mt-4">
+                                <label>Misi <span class="text-danger">*</span></label>
+                                <textarea class="form-control" name="misi" id="misi" placeholder="Masukkan Misi UKM" required></textarea>
+                            </div>
+                            <div class="col-md-12 mt-4">
+                                <label>Syarat Masuk <span class="text-danger">*</span></label>
+                                <textarea class="form-control" name="syarat" id="syarat" placeholder="Masukkan Syarat UKM" required></textarea>
                             </div>
                             <div class="col-md-12 mt-4">
                                 <label>Deskripsi <span class="text-danger">*</span></label>
@@ -173,6 +189,10 @@
                         $('#ukmDeskripsi').val(data.ukmDeskripsi);
                         $('#contact').val(data.contact);
                         $('#ketua').val(data.ketua);
+                        $('#tempat').val(data.tempat);
+                        $('#visi').val(data.visi);
+                        $('#misi').val(data.misi);
+                        $('#syarat').val(data.syarat);
                     } else {
                         $("#formData :input").prop("disabled", true);
                         $('#errorMessage').removeClass('d-none');

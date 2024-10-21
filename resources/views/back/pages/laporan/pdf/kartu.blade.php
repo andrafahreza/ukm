@@ -15,6 +15,7 @@
             margin-right: auto;
             margin-top: auto;
             margin-bottom: auto;
+            color: #fff;
         }
 
         .kartu-peserta-seleksi p {
@@ -82,12 +83,12 @@
 <body>
     <div class="kartu-peserta-seleksi-wrapper">
         <center>
-            <div class="kartu-peserta-seleksi">
+            <div class="kartu-peserta-seleksi" style="background-image: url('https://aurelia.my.id/front/images/banner_img.png')">
                 <div class="head-wrapper">
                     <table border="0">
                         <tr>
                             <th style="padding: 5px">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIBo-ib2ILFRqUA4rBhQMCtXUoJEJ8EzSF3z_thm21X4krlZMyfsOtDMIDXQRuMyFY3YM&usqp=CAU">
+                                <img src="https://upload.wikimedia.org/wikipedia/id/b/b7/Logo_UNIKA.png">
                             </th>
                             <th style="padding: 5px">
                                 <h5>Universitas Katolik Santo Thomas Sumatera Utara <br> <small>Jalan Setia Budi No.479 F, Tanjung Sari</small></h5>
@@ -102,7 +103,7 @@
                     <table style="width: 100%; padding-left: 30px; padding-right: 30px">
                         <tbody>
                             <tr>
-                                <td style="color: #000">{{ $data->user->nama_lengkap }} <br> {{ $data->user->getjurusan->nama_jurusan }} <br> {{ $data->ukm->ukmNama }}</td>
+                                <td style="color: #fff">{{ $data->user->nama_lengkap }} <br> {{ $data->user->getjurusan->nama_jurusan }} <br> {{ $data->ukm->ukmNama }}</td>
                                 <td style="align-content: right">
                                     <img src="https://aurelia.my.id/{{ Auth::user()->photo }}" width="100" height="120">
                                 </td>

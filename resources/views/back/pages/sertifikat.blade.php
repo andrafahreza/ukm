@@ -28,6 +28,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Nama Sertifikat</th>
+                                    <th>User</th>
                                     <th>File</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -36,6 +38,14 @@
                                 @foreach ($data as $key => $item)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
+                                        <td>{{ $item->nama }}</td>
+                                        <td>
+                                            @if ($item->user_id == null)
+                                                Semua Anggota
+                                            @else
+                                                {{ $item->user->nama_lengkap }}
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="/sertifikat/{{ $item->file }}" target="_blank">Lihat File</a>
                                         </td>
@@ -69,6 +79,23 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-12">
+                                <label>Nama Sertifikat <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nama" id="nama" required>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <label>Penerima Sertifikat <span class="text-danger">*</span></label>
+                                <select class="form-control" name="user_id" id="user_id">
+                                    <option value="">Semua Anggota</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->user->id }}">{{ $user->user->nama_lengkap }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
                             <div class="col-md-12">
                                 <label>File <span class="text-danger">*</span></label>
                                 <input type="file" class="form-control" name="file" id="file" required>
@@ -142,6 +169,8 @@
 
                         const data = response.data;
                         $('#formData')[0].reset();
+                        $('#nama').val(data.nama);
+                        $('#user_id').val(data.user_id);
                         $('#formData').attr("action", "{{ route('sertifikat-simpan') }}" + "/" + data.id);
                     } else {
                         $("#formData :input").prop("disabled", true);

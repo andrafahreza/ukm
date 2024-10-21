@@ -32,7 +32,11 @@ class UkmController extends Controller
                 "ukmNama" => $request->ukmNama,
                 "ketua" => $request->ketua,
                 "ukmDeskripsi" => $request->ukmDeskripsi,
-                "contact" => $request->contact
+                "contact" => $request->contact,
+                "tempat" => $request->tempat,
+                "visi" => $request->visi,
+                "misi" => $request->misi,
+                "syarat" => $request->syarat,
             ];
 
             if ($id != null) {

@@ -30,6 +30,9 @@ Route::get('login', [FrontController::class, 'login'])->name('login')->middlewar
 Route::post('login', [AuthController::class, 'auth'])->name('authentication');
 Route::get('register', [FrontController::class, 'register'])->name('register')->middleware('guest');
 Route::post('register', [AuthController::class, 'register'])->name('registered');
+Route::get('login-umum', [FrontController::class, 'login_umum'])->name('login-umum')->middleware('guest');
+Route::get('register-umum', [FrontController::class, 'register_umum'])->name('register-umum')->middleware('guest');
+Route::post('register-umum', [AuthController::class, 'register_umum'])->name('registered-umum');
 Route::get('get/{id?}', [JurusanController::class, 'get'])->name("jurusan-get");
 
 Route::middleware('auth')->group(function() {

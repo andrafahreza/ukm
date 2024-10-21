@@ -36,19 +36,24 @@
                         <img class="rounded-circle mt-5" width="150px"
                             src="{{ Auth::user()->photo }}">
                         <span class="font-weight-bold">
-                            {{ Auth::user()->nama_lengkap }} ({{ Auth::user()->npm }})
+                            {{ Auth::user()->nama_lengkap }}
+                            @if (Auth::user()->npm != null)
+                                ({{ Auth::user()->npm }})
+                            @endif
                         </span>
                         <span class="text-black-50">
                             {{ Auth::user()->email }}
                         </span>
-                        <br><br>
-                        Prodi
-                        <input type="text" class="form-control" placeholder="prodi"
-                            value="{{ Auth::user()->prodi->nama_prodi }}" disabled>
-                        <br>
-                        Jurusan
-                        <input type="text" class="form-control" placeholder="jurusan"
-                            value="{{ Auth::user()->getjurusan->nama_jurusan }}" disabled>
+                        @if (Auth::user()->prodi_id != null)
+                            <br><br>
+                            Prodi
+                            <input type="text" class="form-control" placeholder="prodi"
+                                value="{{ Auth::user()->prodi->nama_prodi }}" disabled>
+                            <br>
+                            Jurusan
+                            <input type="text" class="form-control" placeholder="jurusan"
+                                value="{{ Auth::user()->getjurusan->nama_jurusan }}" disabled>
+                        @endif
                         <br>
                         @if ($ukm->count() > 0)
                             UKM yang diikuti
@@ -93,11 +98,13 @@
                                     <input type="text" name="whatsapp" class="form-control"
                                         placeholder="Masukkan No Whatsapp" value="{{ Auth::user()->whatsapp }}" required>
                                 </div>
-                                <div class="col-md-12">
-                                    <label class="labels">Angkatan</label>
-                                    <input type="number" name="angkatan" class="form-control"
-                                        placeholder="Masukkan Angkatan" value="{{ Auth::user()->angkatan }}" required>
-                                </div>
+                                @if (Auth::user()->prodi_id != null)
+                                    <div class="col-md-12">
+                                        <label class="labels">Angkatan</label>
+                                        <input type="number" name="angkatan" class="form-control"
+                                            placeholder="Masukkan Angkatan" value="{{ Auth::user()->angkatan }}" required>
+                                    </div>
+                                @endif
                                 <div class="col-md-12">
                                     <label class="labels">Alamat</label>
                                     <input type="text" name="alamat" class="form-control" placeholder="Masukkan Alamat"

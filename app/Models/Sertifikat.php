@@ -14,9 +14,15 @@ class Sertifikat extends Model
         'id',
         'ukm_id',
         'file',
+        'user_id',
+        'nama'
     ];
 
     public function ukm(){
         return $this->belongsTo(Ukm::class, "ukm_id");
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, "user_id");
     }
 }

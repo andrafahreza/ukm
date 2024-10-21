@@ -46,6 +46,34 @@ class AuthController extends Controller
         }
     }
 
+    public function register_umum(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $data = User::create([
+                "email" => $request->email,
+                "nama_lengkap" => $request->nama_lengkap,
+                "jenis_kelamin" => $request->jenis_kelamin,
+                "whatsapp" => $request->whatsapp,
+                "alamat" => $request->alamat,
+                "password" => Hash::make($request->password),
+                "role" => "mahasiswa"
+            ]);
+
+            if (!$data->save()) {
+                throw new \Exception("Terjadi kesalahan dalam menyimpan data");
+            }
+
+            DB::commit();
+
+            return redirect()->route('login-umum')->with("success", "Berhasil melakukan pendaftaran akun, silahkan login");
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->withErrors($th->getMessage());
+        }
+    }
+
     public function auth(Request $request)
     {
         try {

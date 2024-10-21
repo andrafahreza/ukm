@@ -19,14 +19,18 @@
                 <div class="col-md-6 layout_padding_2">
                     <div class="full">
                         <div class="heading_main text_align_left">
-						   <h2><span>{{ $ukm->ukmNama }}</span></h2>
+                            <h2><span>{{ $ukm->ukmNama }}</span></h2>
                         </div>
-						<div class="full">
-						  <p>{!! $ukm->ukmDeskripsi !!}</p>
-						</div>
-						<div class="full">
-						   <a class="hvr-radial-out button-theme" href="{{ route('pendaftaran') }}">Daftar</a>
-						</div>
+                        <div class="full">
+                            <p><b>Tempat</b>: {{ $ukm->tempat }}</p>
+                            <p>{!! nl2br(e(str_replace('\r\n', "\n", $ukm->ukmDeskripsi))) !!}</p>
+                            <p><b>Visi</b> <br> {!! nl2br(e(str_replace('\r\n', "\n", $ukm->visi))) !!}</p>
+                            <p><b>Misi</b> <br> {!!nl2br(e(str_replace('\r\n', "\n", $ukm->misi))) !!}</p>
+                            <p><b>Syarat Mendaftar</b> <br> {!!nl2br(e(str_replace('\r\n', "\n", $ukm->syarat))) !!}</p>
+                        </div>
+                        <div class="full">
+                            <a class="hvr-radial-out button-theme" href="{{ route('pendaftaran') }}">Daftar</a>
+                        </div>
                         <div class="full mt-4">
                             <div class="card">
                                 <div class="card-header">
@@ -44,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-				<div class="col-md-6">
+                <div class="col-md-6">
                     <div class="full">
                         <img src="{{ $ukm->logo }}" alt="#" />
                     </div>
